@@ -6,6 +6,7 @@ import AuthorForm from './components/AuthorForm';
 import BookForm from './components/BookForm';
 import AuthorEditForm from './components/AuthorEditForm';
 import BookEditForm from './components/BookEditForm';
+import LoginForm from './components/LoginForm';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import { useState } from 'react';
@@ -29,6 +30,12 @@ function App() {
   const [selectedAuthor, setSelectedAuthor] = useState(null);
   const [selectedBook, setSelectedBook] = useState(null);
   const [authorBooks, setAuthorBooks] = useState([]);
+  const [user, setUser] = useState(null);
+
+  const handleLogin = (userData) => {
+    
+    setUser(userData);
+  }
 
 
   const addAuthor = (newAuthor) => {
@@ -81,7 +88,13 @@ function App() {
   };
   
 
-  
+  if (!user) {
+    return (
+      <div className="App">
+        <LoginForm onLogin={handleLogin} />
+      </div>
+    );
+  }
 
   return (
     <div className="App">
